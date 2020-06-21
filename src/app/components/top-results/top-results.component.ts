@@ -12,8 +12,8 @@ import { QuestionService } from '../../services/question.service';
 })
 export class TopResultsComponent implements OnInit {
 
-  answers: Answer[];
-  questions: Question[];
+  answers: Answer[] = new Array();
+  questions: Question[] = new Array();
   points: {
     name: string,
     point: number
@@ -25,6 +25,8 @@ export class TopResultsComponent implements OnInit {
   ) { }
 
   calcPoints() {
+
+    this.points = [];
     this.answers.forEach(answer => {
       let currentPoint = 0;
       for (let i = 0; i < answer.answers.length; i++) {
@@ -37,15 +39,16 @@ export class TopResultsComponent implements OnInit {
         point: Math.round(currentPoint * 100)
       });
     });
+
+    this.points.sort((a, b) => {
+      return b.point - a.point;
+    });
+
     console.log('Pontok');
     console.log(this.points);
   }
 
   ngOnInit(): void {
-    this.answerService.getAnswers().subscribe(answers => {
-      this.answers = answers;
-      console.log(answers);
-    });
 
     this.questionService.getQuestions().subscribe(questions => {
       this.questions = questions;
@@ -53,6 +56,11 @@ export class TopResultsComponent implements OnInit {
       console.log(questions);
     });
 
+    this.answerService.getAnswers().subscribe(answers => {
+      this.answers = answers;
+      console.log(answers);
+      this.calcPoints();
+    });
     // this.calcPoints();
   }
 

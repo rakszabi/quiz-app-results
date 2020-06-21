@@ -1,2 +1,25 @@
-<p>top-results works!</p>
-<button (click)="calcPoints()">asd</button>
+<!-- <button (click)="calcPoints()">asd</button> -->
+<div class="container">
+  <div class="wrapper">
+    <mat-card *ngIf="points.length > 0">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>{{ points[0].name }} - {{ points[0].point }} pont</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <!-- <h3 mat-subheader>Top 5</h3> -->
+          <ng-container *ngFor="let point of points; last as last; first as first">
+            <mat-list-item *ngIf="!first">
+              <h4 mat-line>{{point.name}}</h4>
+              <p mat-line>{{point.point}} pont</p>
+              <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+            </mat-list-item>
+          </ng-container>
+       </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

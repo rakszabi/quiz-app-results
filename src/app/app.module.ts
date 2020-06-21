@@ -14,6 +14,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from 'src/environments/environment';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,10 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [
     AnswerService,
